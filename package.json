@@ -35,7 +35,6 @@
     "typescript": "^5"
   },
   "prisma": {
-  "seed": "ts-node --project tsconfig.seed.json prisma/seed.ts"
-}
-
+    "seed": "ts-node --project tsconfig.seed.json prisma/seed.ts"
+  }
 }

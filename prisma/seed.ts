@@ -1,7 +1,7 @@
 // prisma/seed.ts
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
-import { invoices, customers, revenue, users } from "../src/lib/placeholder-data";
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import { invoices, customers, revenue, users } from '../src/lib/placeholder-data';
 
 const prisma = new PrismaClient();
 
@@ -42,7 +42,7 @@ async function main() {
         customer_id: invoice.customer_id,
         amount: invoice.amount,
         status: invoice.status,
-        date: new Date(invoice.date)
+        date: new Date(invoice.date),
       },
     });
   }
@@ -59,7 +59,7 @@ async function main() {
     });
   }
 
-  console.log("✅ Database seeded successfully");
+  console.log('✅ Database seeded successfully');
 }
 
 main()
