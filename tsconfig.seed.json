@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "noEmit": false
+  },
+  "include": ["prisma/seed.ts", "src/lib/placeholder-data.ts"]
+}
