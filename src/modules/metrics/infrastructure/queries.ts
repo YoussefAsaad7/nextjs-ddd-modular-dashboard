@@ -35,8 +35,7 @@ export async function fetchCardData() {
   ]);
 
   const paid = invoiceStatus.find((i) => i.status === 'paid')?._sum.amount ?? 0;
-  const pending =
-    invoiceStatus.find((i) => i.status === 'pending')?._sum.amount ?? 0;
+  const pending = invoiceStatus.find((i) => i.status === 'pending')?._sum.amount ?? 0;
 
   return {
     numberOfInvoices: invoiceCount,
