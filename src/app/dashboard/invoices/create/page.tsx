@@ -1,5 +1,5 @@
-import { fetchCustomers } from "@/modules/invoices/application/fetch-customers";
-import CreateInvoiceForm from "@/modules/invoices/ui/create-form";
+import { fetchCustomers } from '@/modules/invoices/application/fetch-customers';
+import CreateInvoiceForm from '@/modules/invoices/ui/create-form';
 
 export default async function Page() {
   const customers = await fetchCustomers();

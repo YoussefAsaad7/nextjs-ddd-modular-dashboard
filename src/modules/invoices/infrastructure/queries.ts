@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/prisma";
-import { Invoice } from "../domain/invoice";
-import { CustomerField, InvoiceForm } from "../domain/types";
+import { prisma } from '@/lib/prisma';
+import { Invoice } from '../domain/invoice';
+import { CustomerField, InvoiceForm } from '../domain/types';
 
 export async function createInvoiceDB({
   customer_id,
@@ -9,7 +9,7 @@ export async function createInvoiceDB({
 }: {
   customer_id: string;
   amount: number;
-  status: "pending" | "paid";
+  status: 'pending' | 'paid';
 }) {
   return prisma.invoice.create({
     data: {
@@ -28,24 +28,20 @@ export async function deleteInvoiceDB(id: string) {
   return prisma.invoice.delete({ where: { id } });
 }
 
-export async function listInvoicesDB(
-  query: string,
-  page: number,
-  limit: number,
-) {
+export async function listInvoicesDB(query: string, page: number, limit: number) {
   return prisma.invoice.findMany({
     where: {
       OR: query
         ? [
-            { customer: { name: { contains: query, mode: "insensitive" } } },
-            { status: { contains: query, mode: "insensitive" } },
+            { customer: { name: { contains: query, mode: 'insensitive' } } },
+            { status: { contains: query, mode: 'insensitive' } },
           ]
         : undefined,
     },
     skip: (page - 1) * limit,
     take: limit,
     include: { customer: true },
-    orderBy: { date: "desc" },
+    orderBy: { date: 'desc' },
   });
 }
 
@@ -54,8 +50,8 @@ export async function countInvoicesPagesDB(query: string, limit = 6) {
     where: query
       ? {
           OR: [
-            { customer: { name: { contains: query, mode: "insensitive" } } },
-            { status: { contains: query, mode: "insensitive" } },
+            { customer: { name: { contains: query, mode: 'insensitive' } } },
+            { status: { contains: query, mode: 'insensitive' } },
           ],
         }
       : undefined,
@@ -72,14 +68,14 @@ export async function getAllCustomers(): Promise<CustomerField[]> {
         name: true,
       },
       orderBy: {
-        name: "asc",
+        name: 'asc',
       },
     });
 
     return customers;
   } catch (err) {
-    console.error("Database Error:", err);
-    throw new Error("Failed to fetch all customers.");
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all customers.');
   }
 }
 
@@ -98,14 +94,14 @@ export async function getInvoiceById(id: string): Promise<InvoiceForm | null> {
 
   return {
     ...invoice,
-    status: invoice.status as "pending" | "paid",
+    status: invoice.status as 'pending' | 'paid',
     amount: invoice.amount / 100, // convert cents to dollars
   };
 }
 
 export async function updateInvoiceById(
   id: string,
-  data: { customer_id: string; amount: number; status: "pending" | "paid" },
+  data: { customer_id: string; amount: number; status: 'pending' | 'paid' },
 ) {
   return await prisma.invoice.update({
     where: { id },
@@ -123,7 +119,7 @@ export async function deleteInvoiceById(id: string) {
       where: { id },
     });
   } catch (error) {
-    console.error("Failed to delete invoice:", error);
-    throw new Error("Failed to delete invoice.");
+    console.error('Failed to delete invoice:', error);
+    throw new Error('Failed to delete invoice.');
   }
 }

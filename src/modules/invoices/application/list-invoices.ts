@@ -1,4 +1,4 @@
-import { listInvoicesDB, countInvoicesPagesDB } from "../infrastructure/queries";
+import { listInvoicesDB, countInvoicesPagesDB } from '../infrastructure/queries';
 
 export async function listInvoices(query: string, page: number, limit = 6) {
   const invoices = await listInvoicesDB(query, page, limit);

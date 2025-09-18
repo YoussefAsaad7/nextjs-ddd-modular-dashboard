@@ -1,14 +1,14 @@
-"use server";
+'use server';
 
-import { deleteInvoiceById } from "../infrastructure/queries";
-import { revalidatePath } from "next/cache";
+import { deleteInvoiceById } from '../infrastructure/queries';
+import { revalidatePath } from 'next/cache';
 
 export async function deleteInvoice(id: string) {
   try {
     await deleteInvoiceById(id);
-    revalidatePath("/dashboard/invoices");
+    revalidatePath('/dashboard/invoices');
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to delete invoice.");
+    throw new Error('Failed to delete invoice.');
   }
 }

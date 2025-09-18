@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useActionState } from "react";
-import { createInvoice, CreateInvoiceState } from "../application/create-invoice";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useActionState } from 'react';
+import { createInvoice, CreateInvoiceState } from '../application/create-invoice';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import {
   CheckIcon,
   ClockIcon,
@@ -89,9 +89,7 @@ export default function CreateInvoiceForm({
 
         {/* Invoice Status */}
         <fieldset>
-          <legend className="mb-2 block text-sm font-medium">
-            Set the invoice status
-          </legend>
+          <legend className="mb-2 block text-sm font-medium">Set the invoice status</legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
@@ -137,9 +135,7 @@ export default function CreateInvoiceForm({
         </fieldset>
 
         <div aria-live="polite" aria-atomic="true">
-          {state.message ? (
-            <p className="mt-2 text-sm text-red-500">{state.message}</p>
-          ) : null}
+          {state.message ? <p className="mt-2 text-sm text-red-500">{state.message}</p> : null}
         </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">

@@ -1,18 +1,15 @@
-"use client";
-import { CustomerField, InvoiceForm } from "@/modules/invoices/domain/types";
-import { Button } from "@/components/ui/button";
-import {
-  updateInvoice,
-  State,
-} from "@/modules/invoices/application/update-invoice";
-import { useActionState } from "react";
-import Link from "next/link";
+'use client';
+import { CustomerField, InvoiceForm } from '@/modules/invoices/domain/types';
+import { Button } from '@/components/ui/button';
+import { updateInvoice, State } from '@/modules/invoices/application/update-invoice';
+import { useActionState } from 'react';
+import Link from 'next/link';
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 
 export default function EditInvoiceForm({
   invoice,
@@ -96,9 +93,7 @@ export default function EditInvoiceForm({
 
         {/* Invoice Status */}
         <fieldset>
-          <legend className="mb-2 block text-sm font-medium">
-            Set the invoice status
-          </legend>
+          <legend className="mb-2 block text-sm font-medium">Set the invoice status</legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
@@ -107,7 +102,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="pending"
-                  defaultChecked={invoice.status === "pending"}
+                  defaultChecked={invoice.status === 'pending'}
                   className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -123,7 +118,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="paid"
-                  defaultChecked={invoice.status === "paid"}
+                  defaultChecked={invoice.status === 'paid'}
                   className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -146,9 +141,7 @@ export default function EditInvoiceForm({
         </fieldset>
 
         <div aria-live="polite" aria-atomic="true">
-          {state.message ? (
-            <p className="my-2 text-sm text-red-500">{state.message}</p>
-          ) : null}
+          {state.message ? <p className="my-2 text-sm text-red-500">{state.message}</p> : null}
         </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">

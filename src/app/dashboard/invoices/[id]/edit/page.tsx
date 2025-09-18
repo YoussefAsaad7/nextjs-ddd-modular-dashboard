@@ -18,10 +18,7 @@ export default async function Page({ params }: PageProps) {
   const id = params.id;
 
   // Fetch invoice and customers in parallel
-  const [invoice, customers] = await Promise.all([
-    fetchInvoiceById(id),
-    fetchCustomers(),
-  ]);
+  const [invoice, customers] = await Promise.all([fetchInvoiceById(id), fetchCustomers()]);
 
   if (!invoice) {
     notFound();
