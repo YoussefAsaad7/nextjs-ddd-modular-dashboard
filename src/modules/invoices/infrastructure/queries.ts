@@ -1,10 +1,25 @@
 import {prisma} from "@/lib/prisma";
 import { Invoice } from "../domain/invoice";
+import { CustomerField } from '../domain/types';
 
-// export async function createInvoiceDB(invoice: Omit<Invoice, "id">) {
-//   return prisma.invoice.create({ data: invoice });
-// }
-
+export async function createInvoiceDB({
+  customer_id,
+  amount,
+  status,
+}: {
+  customer_id: string;
+  amount: number;
+  status: "pending" | "paid";
+}) {
+  return prisma.invoice.create({
+    data: {
+      customer_id,
+      amount,
+      status,
+      date: new Date().toISOString(),
+    },
+  });
+}
 export async function updateInvoiceDB(id: string, invoice: Partial<Invoice>) {
   return prisma.invoice.update({ where: { id }, data: invoice });
 }
@@ -43,4 +58,23 @@ export async function countInvoicesPagesDB(query: string, limit = 6) {
   });
 
   return Math.ceil(count / limit);
+}
+
+export async function getAllCustomers(): Promise<CustomerField[]> {
+  try {
+    const customers = await prisma.customer.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
+
+    return customers;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all customers.');
+  }
 }
