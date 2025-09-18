@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { UpdateInvoice} from './buttons';//, DeleteInvoice } from './buttons';
-import InvoiceStatus from './status';
-import { formatDateToLocal, formatCurrency } from '@/lib/utils';
-import { listInvoices } from '../application/list-invoices';
+import Image from "next/image";
+import { UpdateInvoice, DeleteInvoice } from "./buttons";
+import InvoiceStatus from "./status";
+import { formatDateToLocal, formatCurrency } from "@/lib/utils";
+import { listInvoices } from "../application/list-invoices";
 
 export default async function InvoicesTable({
   query,
@@ -48,7 +48,7 @@ export default async function InvoicesTable({
                   </div>
                   <div className="flex justify-end gap-2">
                     <UpdateInvoice id={invoice.id} />
-                    {/* <DeleteInvoice id={invoice.id} /> */}
+                    <DeleteInvoice id={invoice.id} />
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateInvoice id={invoice.id} />
-                      {/* <DeleteInvoice id={invoice.id} /> */}
+                      <DeleteInvoice id={invoice.id} />
                     </div>
                   </td>
                 </tr>

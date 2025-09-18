@@ -1,6 +1,6 @@
-import {prisma} from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { Invoice } from "../domain/invoice";
-import { CustomerField } from '../domain/types';
+import { CustomerField, InvoiceForm } from "../domain/types";
 
 export async function createInvoiceDB({
   customer_id,
@@ -28,7 +28,11 @@ export async function deleteInvoiceDB(id: string) {
   return prisma.invoice.delete({ where: { id } });
 }
 
-export async function listInvoicesDB(query: string, page: number, limit: number) {
+export async function listInvoicesDB(
+  query: string,
+  page: number,
+  limit: number,
+) {
   return prisma.invoice.findMany({
     where: {
       OR: query
@@ -68,13 +72,58 @@ export async function getAllCustomers(): Promise<CustomerField[]> {
         name: true,
       },
       orderBy: {
-        name: 'asc',
+        name: "asc",
       },
     });
 
     return customers;
   } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch all customers.');
+    console.error("Database Error:", err);
+    throw new Error("Failed to fetch all customers.");
+  }
+}
+
+export async function getInvoiceById(id: string): Promise<InvoiceForm | null> {
+  const invoice = await prisma.invoice.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      customer_id: true,
+      amount: true,
+      status: true,
+    },
+  });
+
+  if (!invoice) return null;
+
+  return {
+    ...invoice,
+    status: invoice.status as "pending" | "paid",
+    amount: invoice.amount / 100, // convert cents to dollars
+  };
+}
+
+export async function updateInvoiceById(
+  id: string,
+  data: { customer_id: string; amount: number; status: "pending" | "paid" },
+) {
+  return await prisma.invoice.update({
+    where: { id },
+    data: {
+      customer_id: data.customer_id,
+      amount: Math.round(data.amount * 100),
+      status: data.status,
+    },
+  });
+}
+
+export async function deleteInvoiceById(id: string) {
+  try {
+    await prisma.invoice.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Failed to delete invoice:", error);
+    throw new Error("Failed to delete invoice.");
   }
 }
