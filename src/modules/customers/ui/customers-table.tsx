@@ -1,15 +1,12 @@
-import Image from "next/image";
-import Search from "@/components/ui/search"; // reuse your Search
-import { lusitana } from "@/lib/fonts";
-import { CustomerRow } from "../domain/types";
-
+import Image from 'next/image';
+import Search from '@/components/ui/search'; // reuse your Search
+import { lusitana } from '@/lib/fonts';
+import { CustomerRow } from '../domain/types';
 
 export default function CustomersTable({ customers }: { customers: CustomerRow[] }) {
   return (
     <div className="w-full">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
-        Customers
-      </h1>
+      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Customers</h1>
       <Search placeholder="Search customers..." />
 
       <div className="mt-6 flow-root">
