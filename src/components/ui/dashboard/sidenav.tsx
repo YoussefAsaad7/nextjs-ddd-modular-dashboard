@@ -1,8 +1,8 @@
-import Link from "next/link";
-import NavLinks from "@/components/ui/dashboard/nav-links";
-import AcmeLogo from "@/components/ui/acme-logo";
-import { PowerIcon } from "@heroicons/react/24/outline";
-import { signOutUser } from "@/modules/auth/application/sign-out";
+import Link from 'next/link';
+import NavLinks from '@/components/ui/dashboard/nav-links';
+import AcmeLogo from '@/components/ui/acme-logo';
+import { PowerIcon } from '@heroicons/react/24/outline';
+import { signOutUser } from '@/modules/auth/application/sign-out';
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
