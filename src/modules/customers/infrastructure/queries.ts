@@ -1,4 +1,3 @@
-// src/modules/customers/infrastructure/queries.ts
 import { prisma } from "@/lib/prisma";
 
 export async function fetchFilteredCustomers(query: string) {
