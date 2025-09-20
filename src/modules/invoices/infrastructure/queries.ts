@@ -14,7 +14,7 @@ export async function createInvoiceDB({
   return prisma.invoice.create({
     data: {
       customer_id,
-      amount,
+      amount: Math.round(amount * 100), // ✅ fixed: store in cents
       status,
       date: new Date().toISOString(),
     },
